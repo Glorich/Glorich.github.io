@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Test</title>
+	<link href="https://fonts.googleapis.com/css?family=Titillium+Web:300,400" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
+	<style>
+		*
+		{
+			font-family: "Open Sans Condensed";
+			font-size: 18px;
+		}
+
+		form
+		{
+			padding: 0;
+			text-align: center;
+		}
+
+		.text
+		{
+			padding: 4px 8px;
+			border: none;
+			border-right: 2px solid #273746;
+			border-bottom: 2px solid #273746;
+			border-left: 2px solid #273746;
+		}
+
+		.text-wrapper
+		{
+			margin: 0 auto;
+			width: fit-content;
+			position: relative;
+		}
+
+		.text-wrapper::before
+		{
+			content: '';
+			display: block;
+			position: absolute;
+			width: 2px;
+			height: 20px;
+			top: 0;
+			left: 0;
+			background-color: #fff;
+			z-index: 3;
+		}
+
+		.text-wrapper::after
+		{
+			content: '';
+			display: block;
+			position: absolute;
+			width: 2px;
+			height: 20px;
+			top: 0;
+			right: 0;
+			background-color: #fff;
+			z-index: 3;
+		}
+
+		.text:focus
+		{
+			outline: none;
+			border-color: #F06292;
+		}
+
+		.radio
+		{
+			position: relative;
+		}
+
+		.radio::before
+		{
+			content: '';
+			display: block;
+			position: absolute;
+			width: 10px;
+			height: 10px;
+			border-radius: 50%;
+			border: 1px solid #273746;
+		}
+
+		.radio:checked::before
+		{
+			content: '';
+			display: block;
+			position: absolute;
+			width: 10px;
+			height: 10px;
+			border-radius: 50%;
+			border: 1px solid #F06292;
+		}
+
+		.radio:checked::after
+		{
+			content: '';
+			display: block;
+			position: absolute;
+			top: 3px;
+			left: 3px;
+			width: 6px;
+			height: 6px;
+			border-radius: 50%;
+			background-color: #F06292;
+			z-index: 3;
+		}
+
+		#check
+		{
+			padding: 3px 20px;
+			font-family: "Titillium Web";
+			font-size: 16px;
+			background-color: transparent;
+			border-color: #273746;
+		}
+
+		#check:focus
+		{
+			outline: none;
+			border-color: #F06292;
+			color: #F06292;
+		}
+
+		#result
+		{
+			text-align: center;
+			font-size: 24px;
+		}
+	</style>
+</head>
+<body>
+	<form name="test">
+		<p id="1">У якій галактиці ми живемо?</p>
+		<div class="text-wrapper"><input type="text" name="vopr1" class="text"></div><p>
+		<p id="2">Скільки планет у сонячній системі?</p>
+		<div class="text-wrapper"><input type="text" name="vopr2" class="text"></div><p>
+		<p id="3">Яка планета сонячної системи є найменшою?</p>
+		<input type="radio" name="vopr3" class="radio">Меркурий<br>
+		<input type="radio" name="vopr3" class="radio">Марс<br>
+		<input type="radio" name="vopr3" class="radio">Земля<p>
+		<p id="4">Яка планета сонячної системи є найбільшою?</p>
+		<input type="radio" name="vopr4" class="radio">Сатурн<br>
+		<input type="radio" name="vopr4" class="radio">Юпітер<br>
+		<input type="radio" name="vopr4" class="radio">Венера<p>
+		<p id="5">Оберіть планети, які належать до внурішніх</p>
+		<input type="checkbox" name="vopr5">Земля<br>
+		<input type="checkbox" name="vopr5">Сатурн<br>
+		<input type="checkbox" name="vopr5">Марс<p>
+		<p id="6">Оберіть планети які класифікують як "Планети гіганти"</p>
+		<input type="checkbox" name="vopr6">Венера<br>
+		<input type="checkbox" name="vopr6">Нептун<br>
+		<input type="checkbox" name="vopr6">Уран<p>
+		<input type="button" value="CHECK" id="check">
+	</form>
+	<div id="result">
+		
+	</div>
+	<script type="text/javascript">
+		window.onload = function() {
+			document.getElementById("check").addEventListener("click", function(){
+				var i=0;
+				if(document.test.vopr1.value=="Чумацький шлях" || document.test.vopr1.value=="Milky way") i++;
+				if(document.test.vopr2.value=="8") i++;
+				if(document.test.vopr3[0].checked) i++;
+				if(document.test.vopr4[1].checked) i++;
+				if(document.test.vopr5[0].checked && document.test.vopr5[2].checked) i++;
+				if(document.test.vopr6[1].checked && document.test.vopr6[2].checked) i++;
+				if(i>=5)
+				{
+					document.getElementById("result").style = "color: green";
+					document.getElementById("result").innerHTML = ("Правильних відповідей - " + i);
+				} else if(i>=3 && i<5)
+				{
+					document.getElementById("result").style = "color: orange";
+					document.getElementById("result").innerHTML = ("Правильних відповідей - " + i);
+				} else
+				{
+					document.getElementById("result").style = "color: red";
+					document.getElementById("result").innerHTML = ("Правильних відповідей - " + i);
+				}
+			});
+		};
+	</script>
+</body>
+</html>
+
